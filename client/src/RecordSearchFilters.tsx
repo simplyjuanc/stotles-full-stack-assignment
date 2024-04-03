@@ -1,5 +1,5 @@
-import { Input } from "antd";
-import React from "react";
+import { Input } from 'antd';
+import React from 'react';
 
 export type SearchFilters = {
   query: string;
@@ -26,7 +26,7 @@ function RecordSearchFilters(props: Props) {
   return (
     <div>
       <Input
-        placeholder="Search text..."
+        placeholder='Search text...'
         value={filters.query}
         onChange={handleQueryChange}
       />

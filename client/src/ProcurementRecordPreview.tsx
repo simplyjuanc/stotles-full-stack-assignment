@@ -1,6 +1,6 @@
-import { Modal } from "antd";
-import React from "react";
-import { ProcurementRecord } from "./Api";
+import { Modal } from 'antd';
+import React from 'react';
+import { ProcurementRecord } from './Api';
 
 type Props = {
   record?: ProcurementRecord;
@@ -16,14 +16,14 @@ function ProcurementRecordPreviewModal(props: Props) {
       visible={!!record}
       onOk={onClose}
       onCancel={onClose}
-      cancelButtonProps={{ style: { display: "none" } }}
+      cancelButtonProps={{ style: { display: 'none' } }}
       maskClosable
-      width="30vw"
+      width='30vw'
     >
       <p>
         <strong>{record.buyer.name}</strong>
       </p>
-      <pre style={{ whiteSpace: "pre-wrap", fontFamily: "inherit" }}>
+      <pre style={{ whiteSpace: 'pre-wrap', fontFamily: 'inherit' }}>
         {record.description}
       </pre>
     </Modal>

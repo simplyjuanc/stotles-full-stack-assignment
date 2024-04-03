@@ -1,8 +1,8 @@
-import { Button } from "antd";
-import React from "react";
-import Api, { ProcurementRecord } from "./Api";
-import RecordSearchFilters, { SearchFilters } from "./RecordSearchFilters";
-import RecordsTable from "./RecordsTable";
+import { Button } from 'antd';
+import React from 'react';
+import Api, { ProcurementRecord } from './Api';
+import RecordSearchFilters, { SearchFilters } from './RecordSearchFilters';
+import RecordsTable from './RecordsTable';
 
 /**
  * This component implements very basic pagination.
@@ -21,7 +21,7 @@ const PAGE_SIZE = 10;
 function RecordSearchPage() {
   const [page, setPage] = React.useState<number>(1);
   const [searchFilters, setSearchFilters] = React.useState<SearchFilters>({
-    query: "",
+    query: '',
   });
 
   const [records, setRecords] = React.useState<
