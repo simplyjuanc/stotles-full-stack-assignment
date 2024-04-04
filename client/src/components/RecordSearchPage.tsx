@@ -1,6 +1,6 @@
 import { Button } from 'antd';
 import React from 'react';
-import Api, { ProcurementRecord } from './Api';
+import Api, { ProcurementRecord } from '../lib/Api';
 import RecordSearchFilters, { SearchFilters } from './RecordSearchFilters';
 import RecordsTable from './RecordsTable';
 
