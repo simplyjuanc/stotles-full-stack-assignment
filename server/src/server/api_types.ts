@@ -15,6 +15,11 @@ export type ProcurementRecordDto = {
   description: string;
   buyer: BuyerDto;
   publishDate: string;
+  value: number | null;
+  currency: string | null;
+  stage: "TENDER" | "CONTRACT";
+  closeDate: string | null;
+  awardDate: string | null;
 };
 
 export type RecordSearchResponse = {
