@@ -1,6 +1,6 @@
 import { RecordSearchRequest, RecordSearchResponse } from "./api_types";
 import { Request, Response } from "express";
-import { searchRecords, serializeProcurementRecords } from "./utils";
+import { getAllBuyers, searchRecords, serializeProcurementRecords } from "./models";
 
 /**
  * This controller implements basic way to paginate through the search results.
@@ -39,3 +39,11 @@ export async function postRecords(req: Request, res: Response) {
   res.json(response);
 }
 
+export async function getBuyers(_req: Request, res: Response) {
+  try {
+    const buyers = await getAllBuyers();
+    res.status(200).json(buyers);
+  } catch (error) {
+    res.status(500).json({ error });
+  }
+}

@@ -74,6 +74,9 @@ function serializeProcurementRecord(
   };
 }
 
+function unique<T>(items: Iterable<T>): T[] {
+  return Array.from(new Set(items));
+}
 
 /**
  * Converts an array of DB-style procurement record object into API types.
@@ -101,6 +104,6 @@ export async function serializeProcurementRecords(
 }
 
 
-function unique<T>(items: Iterable<T>): T[] {
-  return Array.from(new Set(items));
+export async function getAllBuyers(): Promise<Buyer[]> {
+  return await Buyer.findAll({ attributes: { include: ['id', 'name'] } });
 }
