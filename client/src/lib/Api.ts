@@ -35,14 +35,19 @@ class Api {
   async searchRecords(
     request: SearchRecordsRequest
   ): Promise<SearchRecordsResponse> {
-    const response = await fetch("/api/records", {
-      method: "POST",
-      headers: {
-        "content-type": "application/json",
-      },
-      body: JSON.stringify(request),
-    });
-    return await response.json();
+    try {
+      const response = await fetch("/api/records", {
+        method: "POST",
+        headers: {
+          "content-type": "application/json",
+        },
+        body: JSON.stringify(request),
+      });
+      return await response.json();
+    } catch (error) {
+      console.error("Failed to fetch records", error);
+      return { records: [], endOfResults: true };
+    }
   }
 
   async getBuyers(): Promise<Buyer[]> {

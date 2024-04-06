@@ -13,11 +13,10 @@
       window.$RefreshSig$ = () => (type) => type;
       window.__vite_plugin_react_preamble_installed__ = true;
     </script>
-
-    <script type="module" src="<%= assets_url %>/src/main.tsx" defer />
   </head>
 
   <body>
-    <div id="root" />
+    <div id="root"></div>
+    <script type="module" src="<%= assets_url %>/src/main.tsx"></script>
   </body>
 </html>
