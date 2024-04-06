@@ -14,5 +14,5 @@
 }
 
 .input {
-  width: clamp(10rem, 70vw, 80%);
+  width: clamp(10rem, 80vw, 80%);
 }

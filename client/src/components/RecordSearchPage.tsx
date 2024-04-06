@@ -23,8 +23,7 @@ function RecordSearchPage() {
   const [buyers, setBuyers] = React.useState<Buyer[]>([]);
   const [searchFilters, setSearchFilters] = React.useState<SearchFilters>({
     query: '',
-    buyer: '',
-    // TODO Add buyer query to use in the filter
+    buyers: [],
   });
 
   const [records, setRecords] = React.useState<
@@ -41,6 +40,7 @@ function RecordSearchPage() {
     void (async () => {
       const response = await api.searchRecords({
         textSearch: searchFilters.query,
+        buyers: searchFilters.buyers,
         limit: PAGE_SIZE,
         offset: PAGE_SIZE * (page - 1),
       });
@@ -60,7 +60,6 @@ function RecordSearchPage() {
   React.useEffect(() => {
     void (async () => {
       const buyers = await api.getBuyers();
-      console.log({ buyers });
       if (!buyers) return;
       setBuyers(buyers);
     })();
@@ -75,14 +74,11 @@ function RecordSearchPage() {
     setPage((page) => page + 1);
   }, []);
 
-  // TODO Add filter UI elem from Ant Design
-  // Use: "multiple selection" or "Select with search field" in https://ant.design/components/select
-
   return (
     <>
       <RecordSearchFilters
-        buyers={buyers}
         filters={searchFilters}
+        buyers={buyers}
         onChange={handleChangeFilters}
       />
       {records && (

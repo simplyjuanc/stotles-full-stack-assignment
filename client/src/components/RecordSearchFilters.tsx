@@ -5,7 +5,12 @@ import style from './RecordSearchFilters.module.css';
 
 export type SearchFilters = {
   query: string;
-  buyer: string;
+  buyers: string[];
+};
+
+type BuyerLabel = {
+  label: string;
+  value: string;
 };
 
 type Props = {
@@ -16,11 +21,7 @@ type Props = {
 
 function RecordSearchFilters(props: Props) {
   const { filters, buyers, onChange } = props;
-  // TODO Add filter UI elem from Ant Design
-  // Use: "multiple selection" or "Select with search field" in https://ant.design/components/select
-
-  console.log({ buyers });
-  const [buyerLabels, setBuyerLabels] = React.useState<any>();
+  const [buyerLabels, setBuyerLabels] = React.useState<BuyerLabel[]>();
 
   useEffect(() => {
     setBuyerLabels(
@@ -29,7 +30,7 @@ function RecordSearchFilters(props: Props) {
         value: buyer.id,
       }))
     );
-  }, []);
+  }, [buyers]);
 
   // TODO add debouncer for the API call
   const handleQueryChange = React.useCallback(
@@ -42,16 +43,15 @@ function RecordSearchFilters(props: Props) {
     [onChange, filters]
   );
 
-  const handleBuyerChange = React.useCallback((selection: string[]) => {
+  const handleBuyerChange = React.useCallback((buyers: string[]) => {
     // TODO add changing label length, so that when it's selected it gets truncated
-    console.log({ selection });
+    console.log({ selection: buyers });
     onChange({
       ...filters,
-      buyer: selection.join(',') || '',
+      buyers,
     });
-    console.log({ buyer: filters.buyer });
   }, []);
-  // console.log({ buyerLabels });
+
   return (
     <div className={style.filter_header}>
       <h2>Filters</h2>
