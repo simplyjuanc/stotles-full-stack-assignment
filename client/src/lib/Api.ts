@@ -25,6 +25,11 @@ export type SearchRecordsResponse = {
   endOfResults: boolean;
 };
 
+export type Buyer = {
+  id: string;
+  name: string;
+};
+
 class Api {
   async searchRecords(
     request: SearchRecordsRequest
@@ -38,6 +43,17 @@ class Api {
     });
     return await response.json();
   }
+
+  async getBuyers(): Promise<Buyer[]> {
+    try {
+      const response = await fetch("/api/buyers");
+      return await response.json();
+    } catch (error) {
+      console.error("Failed to fetch buyers", error);
+      return [];
+    }
+  }
+
 }
 
-export default Api;
+export default new Api();

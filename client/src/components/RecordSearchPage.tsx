@@ -1,6 +1,6 @@
 import { Button } from 'antd';
 import React from 'react';
-import Api, { ProcurementRecord } from '../lib/Api';
+import api, { Buyer, ProcurementRecord } from '../lib/Api';
 import RecordSearchFilters, { SearchFilters } from './RecordSearchFilters';
 import RecordsTable from './RecordsTable';
 
@@ -20,19 +20,25 @@ const PAGE_SIZE = 10;
 
 function RecordSearchPage() {
   const [page, setPage] = React.useState<number>(1);
+  const [buyers, setBuyers] = React.useState<Buyer[]>([]);
   const [searchFilters, setSearchFilters] = React.useState<SearchFilters>({
     query: '',
+    buyer: '',
+    // TODO Add buyer query to use in the filter
   });
 
   const [records, setRecords] = React.useState<
     ProcurementRecord[] | undefined
   >();
-
+  // TODO add fetch of unique buyers to populate the filter
   const [reachedEndOfSearch, setReachedEndOfSearch] = React.useState(false);
 
   React.useEffect(() => {
+    // TODO add back end method to search records with filters
+    // in addition to text search query
+
+    // TODO write tests for API calls when filters are changed
     void (async () => {
-      const api = new Api();
       const response = await api.searchRecords({
         textSearch: searchFilters.query,
         limit: PAGE_SIZE,
@@ -51,6 +57,15 @@ function RecordSearchPage() {
     })();
   }, [searchFilters, page]);
 
+  React.useEffect(() => {
+    void (async () => {
+      const buyers = await api.getBuyers();
+      console.log({ buyers });
+      if (!buyers) return;
+      setBuyers(buyers);
+    })();
+  }, [api]);
+
   const handleChangeFilters = React.useCallback((newFilters: SearchFilters) => {
     setSearchFilters(newFilters);
     setPage(1); // reset pagination state
@@ -60,9 +75,13 @@ function RecordSearchPage() {
     setPage((page) => page + 1);
   }, []);
 
+  // TODO Add filter UI elem from Ant Design
+  // Use: "multiple selection" or "Select with search field" in https://ant.design/components/select
+
   return (
     <>
       <RecordSearchFilters
+        buyers={buyers}
         filters={searchFilters}
         onChange={handleChangeFilters}
       />
