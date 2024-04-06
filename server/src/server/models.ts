@@ -24,9 +24,6 @@ export async function searchRecords(
     buyerFilter = `buyer_id IN ("${buyers.join('","')}")`;
   }
 
-  console.log({ buyerFilter });
-
-
   if (textSearch) {
     return await sequelize.query(
       `

@@ -29,14 +29,9 @@ function RecordSearchPage() {
   const [records, setRecords] = React.useState<
     ProcurementRecord[] | undefined
   >();
-  // TODO add fetch of unique buyers to populate the filter
   const [reachedEndOfSearch, setReachedEndOfSearch] = React.useState(false);
 
   React.useEffect(() => {
-    // TODO add back end method to search records with filters
-    // in addition to text search query
-
-    // TODO write tests for API calls when filters are changed
     void (async () => {
       const response = await api.searchRecords({
         textSearch: searchFilters.query,

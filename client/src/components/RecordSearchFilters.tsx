@@ -32,7 +32,6 @@ function RecordSearchFilters(props: Props) {
     );
   }, [buyers]);
 
-  // TODO add debouncer for the API call
   const handleQueryChange = React.useCallback(
     (e: React.FormEvent<HTMLInputElement>) => {
       onChange({
@@ -44,8 +43,6 @@ function RecordSearchFilters(props: Props) {
   );
 
   const handleBuyerChange = React.useCallback((buyers: string[]) => {
-    // TODO add changing label length, so that when it's selected it gets truncated
-    console.log({ selection: buyers });
     onChange({
       ...filters,
       buyers,
