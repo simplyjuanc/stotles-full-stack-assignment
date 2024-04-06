@@ -20,12 +20,8 @@ export async function searchRecords(
   const isBuyers = buyers && buyers.length > 0;
   let buyerFilter = '';
   if (isBuyers) {
-    // const buyerIds = buyers.map((buyer) => `'${buyer}'`).join(',');
     buyerFilter = `buyer_id IN ("${buyers.join('","')}")`;
   }
-
-  console.log({ buyerFilter });
-
 
   if (textSearch) {
     return await sequelize.query(
@@ -46,24 +42,24 @@ export async function searchRecords(
         },
       }
     );
-  } else {
-    return await sequelize.query(
-      `
-      SELECT * 
-      FROM procurement_records 
-      ${isBuyers ? ('WHERE ' + buyerFilter) : ''} 
-      LIMIT :limit 
-      OFFSET :offset
-      `,
-      {
-        model: ProcurementRecord,
-        replacements: {
-          offset: offset,
-          limit: limit,
-        },
-      }
-    );
   }
+
+  return await sequelize.query(
+    `
+    SELECT * 
+    FROM procurement_records 
+    ${isBuyers ? ('WHERE ' + buyerFilter) : ''} 
+    LIMIT :limit 
+    OFFSET :offset
+    `,
+    {
+      model: ProcurementRecord,
+      replacements: {
+        offset: offset,
+        limit: limit,
+      },
+    }
+  );
 }
 
 export async function getAllBuyers(): Promise<Buyer[]> {
