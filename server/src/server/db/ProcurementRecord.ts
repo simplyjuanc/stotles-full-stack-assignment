@@ -6,7 +6,7 @@ import {
   Table,
 } from "sequelize-typescript";
 
-@Table({ createdAt: false, updatedAt: false })
+@Table({ tableName: 'procurement_records', createdAt: false, updatedAt: false })
 export class ProcurementRecord extends Model {
   @Column({ primaryKey: true })
   id!: string;

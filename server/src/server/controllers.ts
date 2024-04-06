@@ -10,7 +10,6 @@ import { serializeProcurementRecords } from "./utils";
 export async function postRecords(req: Request, res: Response) {
   try {
     const requestPayload = req.body as RecordSearchRequest;
-
     const { limit, offset } = requestPayload;
 
     if (limit === 0 || limit > 100) {
@@ -30,6 +29,7 @@ export async function postRecords(req: Request, res: Response) {
       offset,
       limit + 1
     );
+    if (!records) throw new Error("No records found");
 
     const response: RecordSearchResponse = {
       records: await serializeProcurementRecords(
@@ -47,6 +47,7 @@ export async function postRecords(req: Request, res: Response) {
 export async function getBuyers(_req: Request, res: Response) {
   try {
     const buyers = await getAllBuyers();
+    if (!buyers) throw new Error("No buyers found");
     res.status(200).json(buyers);
   } catch (error) {
     res.status(500).json({ error });
