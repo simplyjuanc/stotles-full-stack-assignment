@@ -1,6 +1,7 @@
-import React from 'react';
-import { Input, Select, Space, type SelectProps } from 'antd';
+import React, { useEffect } from 'react';
+import { Input, Select, Space } from 'antd';
 import { Buyer } from '../lib/Api';
+import style from './RecordSearchFilters.module.css';
 
 export type SearchFilters = {
   query: string;
@@ -15,14 +16,20 @@ type Props = {
 
 function RecordSearchFilters(props: Props) {
   const { filters, buyers, onChange } = props;
-  const [buyerLabels, setBuyerValues] = React.useState(
-    buyers.map((buyer) => {
-      return {
+  // TODO Add filter UI elem from Ant Design
+  // Use: "multiple selection" or "Select with search field" in https://ant.design/components/select
+
+  console.log({ buyers });
+  const [buyerLabels, setBuyerLabels] = React.useState<any>();
+
+  useEffect(() => {
+    setBuyerLabels(
+      buyers.map((buyer) => ({
         label: buyer.name,
         value: buyer.id,
-      };
-    })
-  );
+      }))
+    );
+  }, []);
 
   // TODO add debouncer for the API call
   const handleQueryChange = React.useCallback(
@@ -44,24 +51,32 @@ function RecordSearchFilters(props: Props) {
     });
     console.log({ buyer: filters.buyer });
   }, []);
-
+  // console.log({ buyerLabels });
   return (
-    <div>
-      <Input
-        placeholder='Search text...'
-        value={filters.query}
-        onChange={handleQueryChange}
-      />
-      <Space direction='vertical'>
-        <Select
-          mode='multiple'
-          allowClear
-          style={{ width: '100%' }}
-          placeholder='Please select buyer'
-          onChange={handleBuyerChange}
-          options={buyerLabels}
+    <div className={style.filter_header}>
+      <h2>Filters</h2>
+      <div className={style.filter}>
+        <h3>Content</h3>
+        <Input
+          placeholder='Search text...'
+          value={filters.query}
+          onChange={handleQueryChange}
+          className={style.input}
         />
-      </Space>
+      </div>
+      <div className={style.filter}>
+        <h3>Buyer</h3>
+        <Space direction='vertical' className={style.input}>
+          <Select
+            mode='multiple'
+            allowClear
+            style={{ width: '100%' }}
+            placeholder='Please select buyer'
+            onChange={handleBuyerChange}
+            options={buyerLabels}
+          />
+        </Space>
+      </div>
     </div>
   );
 }
