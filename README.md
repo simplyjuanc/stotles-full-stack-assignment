@@ -1,5 +1,35 @@
 # Stotles work sample assignment
 
+## Notes from Juan Vásquez
+
+### General
+
+Besides the different tasks in the assessment, I've primarily:
+
+- Introduced some Separation of Concerns (primarily in the server) following an MVC model.
+- Changed the raw queries in the data models to a programmatic access for better security and type-integrity
+- Added a debouncer in the RecordSearchPage to decrease the number of server calls,
+
+### Future Work
+
+With more time available, I would have introduced the changes below.
+
+#### Performance Improvements
+
+- Unit testing with Vitest or React Testing Library to improve code confidence and development speed.
+- Separated the filters into multiple components for reusability.
+- Migrated to React Query to reduce the number of useEffects and other hooks used.
+- Fuzzy search for the text query.
+- If there's no need to keep the data up-to-date reactively, and depending on the number of records in the DB, I would probably move the entire logic to the client and call Records and Buyers only once. If we wanted to make this a scalable service, I would not introduce that change.
+
+#### UI/UX Improvements
+
+- Introduce elements to give feedback to the user: loader/spinner, sorting options for the table, additional filters (see point above on component reusability), additional columns (e.g. country in the buyer data), a toaster for unsuccessful requests (e.g. with 0 records or buyers)..
+- Make the wall of tenders 1) actionable by adding links or contact numbers for the users (would imply adding one or more fields in DB, plus cascading modifications) and 2) responsive if there's a use case for it to be used on mobile.
+- Add the text and buyer queries (and any other additional filters) as a query param in the URL, so it can be shared with the state already pre-selected. This would imply making changes in the BE controllers to admit this type of request.
+
+---
+
 ## Getting started
 
 This sample codebase consists of a separate client & server code.
