@@ -37,7 +37,6 @@ function RecordSearchPage() {
     React.useState<NodeJS.Timeout | null>(null);
 
   React.useEffect(() => {
-    // TODO write tests for API calls when filters are changed
     if (debounceTimer) {
       clearTimeout(debounceTimer);
     }
@@ -75,6 +74,10 @@ function RecordSearchPage() {
 
   React.useEffect(() => {
     if (!records) return;
+    if (!searchFilters.query) {
+      setBuyers(initialBuyers);
+      return;
+    }
     const recordBuyerIds = new Set(records.map((record) => record.buyer.id));
     const newBuyers = initialBuyers.filter((buyer) =>
       recordBuyerIds.has(buyer.id)
