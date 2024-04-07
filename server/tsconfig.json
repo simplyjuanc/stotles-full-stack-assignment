@@ -6,7 +6,7 @@
     "allowJs": true,
     "outDir": "dist",
     // STOTLES NOTE: Set to true if you want to enable strict TS checks
-    "strict": false,
+    "strict": true,
     // "noImplicitAny": true,                 /* Raise error on expressions and declarations with an implied 'any' type. */
     // "noImplicitThis": true,                /* Raise error on 'this' expressions with an implied 'any' type. */
     "baseUrl": "./",
@@ -14,9 +14,7 @@
     "skipLibCheck": true,
     "experimentalDecorators": true,
     "emitDecoratorMetadata": true,
+    "types": ["node"]
   },
-  "include": [
-    "src/**/*.ts",
-    "spec/**/*.ts"
-  ]
+  "include": ["src/**/*.ts", "spec/**/*.ts"]
 }

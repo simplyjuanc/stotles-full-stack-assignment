@@ -1,6 +1,6 @@
-import { Table, Column, Model, HasMany } from "sequelize-typescript";
+import { Table, Column, Model } from "sequelize-typescript";
 
-@Table({ createdAt: false, updatedAt: false })
+@Table({ tableName: 'buyers', createdAt: false, updatedAt: false })
 export class Buyer extends Model {
   @Column({ primaryKey: true })
   id!: string;

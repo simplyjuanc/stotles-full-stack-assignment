@@ -1,0 +1,19 @@
+.filter_header {
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  padding-left: 1rem;
+  margin-bottom: 1rem;
+  gap: 1rem;
+}
+
+.filter {
+  display: flex;
+  flex-direction: row;
+  gap: 1rem;
+  justify-content: space-between;
+}
+
+.input {
+  width: clamp(10rem, 80vw, 80%);
+}
