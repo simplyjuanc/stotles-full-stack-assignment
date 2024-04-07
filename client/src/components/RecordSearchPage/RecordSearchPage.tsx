@@ -33,8 +33,7 @@ function RecordSearchPage() {
     ProcurementRecord[] | undefined
   >();
   const [reachedEndOfSearch, setReachedEndOfSearch] = React.useState(false);
-  const [debounceTimer, setDebounceTimer] =
-    React.useState<NodeJS.Timeout | null>(null);
+  const [debounceTimer, setDebounceTimer] = React.useState<number | null>(null);
 
   React.useEffect(() => {
     if (debounceTimer) {
